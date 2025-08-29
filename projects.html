@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Research Lab - 프로젝트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        nav ul a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul a:hover::after,
+        nav ul a.active::after {
+            width: 80%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 100px 5% 50px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: #666;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            padding: 40px 0 20px;
+            background: white;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-tab:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            padding: 60px 0 80px;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .project-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .project-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .status-ongoing {
+            color: #4caf50;
+        }
+
+        .status-completed {
+            color: #2196f3;
+        }
+
+        .status-planned {
+            color: #ff9800;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .project-year {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: normal;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #667eea;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        .project-team {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .team-member-mini {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            border: 2px solid white;
+            margin-left: -10px;
+        }
+
+        .team-member-mini:first-child {
+            margin-left: 0;
+        }
+
+        .project-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Project Detail Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Innovation Lab</a>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">소개</a></li>
+                <li><a href="projects.html" class="active">프로젝트</a></li>
+                <li><a href="research.html">연구분야</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>연구 프로젝트</h1>
+        <p>혁신적인 기술로 세상을 변화시킵니다</p>
+    </div>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <div class="filter-tab active" onclick="filterProjects('all')">전체</div>
+                <div class="filter-tab" onclick="filterProjects('ongoing')">진행중</div>
+                <div class="filter-tab" onclick="filterProjects('completed')">완료</div>
+                <div class="filter-tab" onclick="filterProjects('ai')">인공지능</div>
+                <div class="filter-tab" onclick="filterProjects('healthcare')">헬스케어</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card scroll-animate" data-category="ongoing ai healthcare">
+                    <div class="project-image">
+                        <div class="project-icon">🏥</div>
+                        <span class="project-status status-ongoing">진행중</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            AI 기반 의료 진단 시스템
+                            <span class="project-year">2023-2025</span>
+                        </h3>
+                        <p class="project-description">
+                            딥러닝을 활용한 의료 영상 분석 시스템으로, X-ray, CT, MRI 영상을 실시간으로 분석하여 질병을 조기에 발견하고 진단 정확도를 향상시킵니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">딥러닝</span>
+                            <span class="project-tag">의료영상</span>
+                            <span class="project-tag">CNN</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <div class="team-member-mini">김</div>
+                                <div class="team-member-mini">이</div>
+                                <div class="team-member-mini">박</div>
+                                <div class="team-member-mini">+3</div>
+                            </div>
+                            <a href="#" class="project-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card scroll-animate" data-category="ongoing ai">
+                    <div class="project-image">
+                        <div class="project-icon">🚗</div>
+                        <span class="project-status status-ongoing">진행중</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            자율주행 알고리즘 개발
+                            <span class="project-year">2022-2024</span>
+                        </h3>
+                        <p class="project-description">
+                            컴퓨터 비전과 센서 융합 기술을 활용한 Level 4 자율주행 시스템 개발. 도심 환경에서의 안전한 자율주행을 목표로 연구 진행중입니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">컴퓨터비전</span>
+                            <span class="project-tag">센서융합</span>
+                            <span class="project-tag">SLAM</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <div class="team-member-mini">최</div>
+                                <div class="team-member-mini">정</div>
+                                <div class="team-member-mini">+2</div>
+                            </div>
+                            <a href="#" class="project-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card scroll-animate" data-category="ongoing">
+                    <div class="project-image">
+                        <div class="project-icon">🏙️</div>
+                        <span class="project-status status-ongoing">진행중</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            스마트 시티 플랫폼
+                            <span class="project-year">2023-2026</span>
+                        </h3>
+                        <p class="project-description">
+                            IoT 센서와 빅데이터 분석을 통한 도시 인프라 최적화 플랫폼. 교통, 에너지, 환경 데이터를 통합 관리하여 효율적인 도시 운영을 지원합니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">IoT</span>
+                            <span class="project-tag">빅데이터</span>
+                            <span class="project-tag">클라우드</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <div class="team-member-mini">강</div>
+                                <div class="team-member-mini">윤</div>
+                                <div class="team-member-mini">서</div>
+                                <div class="team-member-mini">+4</div>
+                            </div>
+                            <a href="#" class="project-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card scroll-animate" data-category="completed ai">
+                    <div class="project-image">
+                        <div class="project-icon">💬</div>
+                        <span class="project-status status-completed">완료</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            다국어 자연어처리 엔진
+                            <span class="project-year">2021-2023</span>
+                        </h3>
+                        <p class="project-description">
+                            Transformer 기반의 다국어 자연어처리 엔진 개발. 한국어, 영어, 중국어, 일본어를 지원하며 번역, 요약, 감정분석 기능을 제공합니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">Transformer</span>
+                            <span class="project-tag">BERT</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <div class="team-member-mini">한</div>
+                                <div class="team-member-mini">조</div>
+                                <div class="team-member-mini">+3</div>
+                            </div>
+                            <a href="#" class="project-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card scroll-animate" data-category="completed healthcare">
+                    <div class="project-image">
+                        <div class="project-icon">🧬</div>
+                        <span class="project-status status-completed">완료</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            유전체 분석 플랫폼
+                            <span class="project-year">2020-2023</span>
+                        </h3>
+                        <p class="project-description">
+                            대용량 유전체 데이터를 고속으로 분석하는 플랫폼. 개인 맞춤형 의료와 신약 개발을 위한 유전적 변이 분석 도구를 제공합니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">바이오인포매틱스</span>
+                            <span class="project-tag">유전체학</span>
+                            <span class="project-tag">HPC</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <div class="team-member-mini">노</div>
+                                <div class="team-member-mini">문</div>
+                                <div class="team-member-mini">+2</div>
+                            </div>
+                            <a href="#" class="project-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card scroll-animate" data-category="ongoing ai">
+                    <div class="project-image">
+                        <div class="project-icon">🔒</div>
+                        <span class="project-status status-ongoing">진행중</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            AI 보안 위협 탐지 시스템
+                            <span class="project-year">2024-2026</span>
+                        </h3>
+                        <p class="project-description">
+                            머신러닝을 활용한 실시간 사이버 위협 탐지 및 대응 시스템. 제로데이 공격과 APT 공격을 효과적으로 방어합니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">사이버보안</span>
+                            <span class="project-tag">이상탐지</span>
+                            <span class="project-tag">XAI</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <div class="team-member-mini">송</div>
+                                <div class="team-member-mini">백</div>
+                                <div class="team-member-mini">+3</div>
+                            </div>
+                            <a href="#" class="project-link">자세히 보기 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <h2>프로젝트 상세 정보</h2>
+            <p style="margin-top: 2rem; color: #666;">프로젝트의 상세 정보가 여기에 표시됩니다.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">홈</a>
+                <a href="about.html">소개</a>
+                <a href="projects.html">프로젝트</a>
+                <a href="research.html">연구분야</a>
+            </div>
+            <p>&copy; 2024 Innovation Research Lab. All rights reserved.</p>
+            <p>📍 서울시 관악구 대학로 1 | 📧 research@university.ac.kr | 📞 02-123-4567</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter projects
+        function filterProjects(category) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            const projects = document.querySelectorAll('.project-card');
+            
+            // Update active tab
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.includes('전체') && category === 'all' ||
+                    tab.textContent.includes('진행중') && category === 'ongoing' ||
+                    tab.textContent.includes('완료') && category === 'completed' ||
+                    tab.textContent.includes('인공지능') && category === 'ai' ||
+                    tab.textContent.includes('헬스케어') && category === 'healthcare') {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Filter projects
+            projects.forEach(project => {
+                if (category === 'all' || project.dataset.category.includes(category)) {
+                    project.style.display = 'block';
+                    setTimeout(() => {
+                        project.style.opacity = '1';
+                        project.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    project.style.opacity = '0';
+                    project.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        project.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('projectModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Add click events to project links
+        document.querySelectorAll('.project-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('projectModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effect to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

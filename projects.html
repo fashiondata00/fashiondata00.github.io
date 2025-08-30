@@ -477,9 +477,9 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="home.html" class="logo">Innovation Lab</a>
+            <a href="index.html" class="logo">Innovation Lab</a>
             <ul>
-                <li><a href="home.html">홈</a></li>
+                <li><a href="index.html">홈</a></li>
                 <li><a href="about.html">소개</a></li>
                 <li><a href="projects.html" class="active">프로젝트</a></li>
                 <li><a href="research.html">연구분야</a></li>
@@ -501,7 +501,8 @@
                 <div class="filter-tab" onclick="filterProjects('ongoing')">진행중</div>
                 <div class="filter-tab" onclick="filterProjects('completed')">완료</div>
                 <div class="filter-tab" onclick="filterProjects('ai')">인공지능</div>
-                <div class="filter-tab" onclick="filterProjects('healthcare')">헬스케어</div>
+                <div class="filter-tab" onclick="filterProjects('bigdata')">빅데이터</div>
+                <div class="filter-tab" onclick="filterProjects('strategy')">전략기획</div>
             </div>
         </div>
     </section>
@@ -511,30 +512,27 @@
         <div class="container">
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card scroll-animate" data-category="ongoing ai healthcare">
+                <div class="project-card scroll-animate" data-category="ongoing ai">
                     <div class="project-image">
-                        <div class="project-icon">🏥</div>
+                        <div class="project-icon">👁️</div>
                         <span class="project-status status-ongoing">진행중</span>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">
-                            AI 기반 의료 진단 시스템
+                            Computer vision
                             <span class="project-year">2023-2025</span>
                         </h3>
                         <p class="project-description">
-                            딥러닝을 활용한 의료 영상 분석 시스템으로, X-ray, CT, MRI 영상을 실시간으로 분석하여 질병을 조기에 발견하고 진단 정확도를 향상시킵니다.
+                            한국의 패션 데이터 셋을 구축, 한국 고유의 스타일을 detection하는 A.I 개발
                         </p>
                         <div class="project-tags">
-                            <span class="project-tag">딥러닝</span>
-                            <span class="project-tag">의료영상</span>
+                            <span class="project-tag">Deeplearning</span>
+                            <span class="project-tag">Fashion</span>
                             <span class="project-tag">CNN</span>
                         </div>
                         <div class="project-footer">
                             <div class="project-team">
-                                <div class="team-member-mini">김</div>
-                                <div class="team-member-mini">이</div>
-                                <div class="team-member-mini">박</div>
-                                <div class="team-member-mini">+3</div>
+                                <div class="team-member-mini">Kwon</div>
                             </div>
                             <a href="#" class="project-link">자세히 보기 →</a>
                         </div>
@@ -544,27 +542,24 @@
                 <!-- Project 2 -->
                 <div class="project-card scroll-animate" data-category="ongoing ai">
                     <div class="project-image">
-                        <div class="project-icon">🚗</div>
+                        <div class="project-icon">🤖</div>
                         <span class="project-status status-ongoing">진행중</span>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">
-                            자율주행 알고리즘 개발
+                            Human A.I interaction
                             <span class="project-year">2022-2024</span>
                         </h3>
                         <p class="project-description">
-                            컴퓨터 비전과 센서 융합 기술을 활용한 Level 4 자율주행 시스템 개발. 도심 환경에서의 안전한 자율주행을 목표로 연구 진행중입니다.
+                            LLM model과 소비자의 상호작용 과정에서 발생하는 심리학적 기전에 대한 연구
                         </p>
                         <div class="project-tags">
-                            <span class="project-tag">컴퓨터비전</span>
-                            <span class="project-tag">센서융합</span>
-                            <span class="project-tag">SLAM</span>
+                            <span class="project-tag">LLM model</span>
+                            <span class="project-tag">Consumer Behavior</span>
                         </div>
                         <div class="project-footer">
                             <div class="project-team">
-                                <div class="team-member-mini">최</div>
-                                <div class="team-member-mini">정</div>
-                                <div class="team-member-mini">+2</div>
+                                <div class="team-member-mini">Kwon</div>
                             </div>
                             <a href="#" class="project-link">자세히 보기 →</a>
                         </div>
@@ -572,127 +567,60 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card scroll-animate" data-category="ongoing">
+                <div class="project-card scroll-animate" data-category="ongoing bigdata">
                     <div class="project-image">
-                        <div class="project-icon">🏙️</div>
+                        <div class="project-icon">📊</div>
                         <span class="project-status status-ongoing">진행중</span>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">
-                            스마트 시티 플랫폼
-                            <span class="project-year">2023-2026</span>
+                            Infulencer Engagment
+                            <span class="project-year">2022-2024</span>
                         </h3>
                         <p class="project-description">
-                            IoT 센서와 빅데이터 분석을 통한 도시 인프라 최적화 플랫폼. 교통, 에너지, 환경 데이터를 통합 관리하여 효율적인 도시 운영을 지원합니다.
+                            xgboost와 SHAP interaction을 통해 어떤 요인이 참여수(좋아요, 댓글, 공유)등을 높이는지 분석
                         </p>
                         <div class="project-tags">
-                            <span class="project-tag">IoT</span>
-                            <span class="project-tag">빅데이터</span>
-                            <span class="project-tag">클라우드</span>
+                            <span class="project-tag">LLM model</span>
+                            <span class="project-tag">Consumer Behavior</span>
                         </div>
                         <div class="project-footer">
                             <div class="project-team">
-                                <div class="team-member-mini">강</div>
-                                <div class="team-member-mini">윤</div>
-                                <div class="team-member-mini">서</div>
-                                <div class="team-member-mini">+4</div>
+                                <div class="team-member-mini">Kwon</div>
+                                <div class="team-member-mini">+7</div>
                             </div>
                             <a href="#" class="project-link">자세히 보기 →</a>
                         </div>
                     </div>
                 </div>
-
                 <!-- Project 4 -->
-                <div class="project-card scroll-animate" data-category="completed ai">
+                <div class="project-card scroll-animate" data-category="completed strategy">
                     <div class="project-image">
-                        <div class="project-icon">💬</div>
+                        <div class="project-icon">📑</div>
                         <span class="project-status status-completed">완료</span>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">
-                            다국어 자연어처리 엔진
-                            <span class="project-year">2021-2023</span>
+                            LF fashion
+                            <span class="project-year">2022-2023</span>
                         </h3>
                         <p class="project-description">
-                            Transformer 기반의 다국어 자연어처리 엔진 개발. 한국어, 영어, 중국어, 일본어를 지원하며 번역, 요약, 감정분석 기능을 제공합니다.
+                            데이터 기반의 전략 수립
                         </p>
                         <div class="project-tags">
                             <span class="project-tag">NLP</span>
-                            <span class="project-tag">Transformer</span>
+                            <span class="project-tag">Network analysis</span>
                             <span class="project-tag">BERT</span>
                         </div>
                         <div class="project-footer">
                             <div class="project-team">
-                                <div class="team-member-mini">한</div>
-                                <div class="team-member-mini">조</div>
-                                <div class="team-member-mini">+3</div>
+                                <div class="team-member-mini">Kwon</div>
+                                <div class="team-member-mini">SNU</div>
                             </div>
                             <a href="#" class="project-link">자세히 보기 →</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Project 5 -->
-                <div class="project-card scroll-animate" data-category="completed healthcare">
-                    <div class="project-image">
-                        <div class="project-icon">🧬</div>
-                        <span class="project-status status-completed">완료</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">
-                            유전체 분석 플랫폼
-                            <span class="project-year">2020-2023</span>
-                        </h3>
-                        <p class="project-description">
-                            대용량 유전체 데이터를 고속으로 분석하는 플랫폼. 개인 맞춤형 의료와 신약 개발을 위한 유전적 변이 분석 도구를 제공합니다.
-                        </p>
-                        <div class="project-tags">
-                            <span class="project-tag">바이오인포매틱스</span>
-                            <span class="project-tag">유전체학</span>
-                            <span class="project-tag">HPC</span>
-                        </div>
-                        <div class="project-footer">
-                            <div class="project-team">
-                                <div class="team-member-mini">노</div>
-                                <div class="team-member-mini">문</div>
-                                <div class="team-member-mini">+2</div>
-                            </div>
-                            <a href="#" class="project-link">자세히 보기 →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6 -->
-                <div class="project-card scroll-animate" data-category="ongoing ai">
-                    <div class="project-image">
-                        <div class="project-icon">🔒</div>
-                        <span class="project-status status-ongoing">진행중</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">
-                            AI 보안 위협 탐지 시스템
-                            <span class="project-year">2024-2026</span>
-                        </h3>
-                        <p class="project-description">
-                            머신러닝을 활용한 실시간 사이버 위협 탐지 및 대응 시스템. 제로데이 공격과 APT 공격을 효과적으로 방어합니다.
-                        </p>
-                        <div class="project-tags">
-                            <span class="project-tag">사이버보안</span>
-                            <span class="project-tag">이상탐지</span>
-                            <span class="project-tag">XAI</span>
-                        </div>
-                        <div class="project-footer">
-                            <div class="project-team">
-                                <div class="team-member-mini">송</div>
-                                <div class="team-member-mini">백</div>
-                                <div class="team-member-mini">+3</div>
-                            </div>
-                            <a href="#" class="project-link">자세히 보기 →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Modal -->
@@ -708,7 +636,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="home.html">홈</a>
+                <a href="index.html">홈</a>
                 <a href="about.html">소개</a>
                 <a href="projects.html">프로젝트</a>
                 <a href="research.html">연구분야</a>
@@ -731,7 +659,8 @@
                     tab.textContent.includes('진행중') && category === 'ongoing' ||
                     tab.textContent.includes('완료') && category === 'completed' ||
                     tab.textContent.includes('인공지능') && category === 'ai' ||
-                    tab.textContent.includes('헬스케어') && category === 'healthcare') {
+                    tab.textContent.includes('빅데이터') && category === 'bigdata' ||
+                    tab.textContent.includes('전략기획') && category === 'strategy') {
                     tab.classList.add('active');
                 }
             });

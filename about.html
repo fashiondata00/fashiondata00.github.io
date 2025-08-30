@@ -19,8 +19,14 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
-        nav {
+        /* ✅ 새로 추가: nav 높이를 변수로 지정 */
+        :root{
+            --topnav-h: 64px;   /* 첫 번째 nav 높이 */
+            --subnav-h: 48px;   /* 두 번째 nav 높이 */
+        }
+
+        /* ✅ 첫 번째 nav (고정 - 로고/외부 페이지용) */
+        .top-nav{
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 5%;
@@ -30,6 +36,16 @@
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.08);
             animation: slideDown 0.6s ease-out;
+        }
+
+        /* ✅ 두 번째 nav (sticky - 내부 섹션 이동용) */
+        .sub-nav{
+            position: sticky;
+            top: var(--topnav-h);
+            background: #fff;
+            padding: 0.6rem 5%;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         @keyframes slideDown {
@@ -43,6 +59,7 @@
             }
         }
 
+        /* 공통 nav 스타일 */
         nav ul {
             list-style: none;
             display: flex;
@@ -50,7 +67,6 @@
             align-items: center;
             gap: 2rem;
         }
-
         nav a {
             text-decoration: none;
             color: #333;
@@ -59,7 +75,6 @@
             position: relative;
             padding: 0.5rem 1rem;
         }
-
         nav a::after {
             content: '';
             position: absolute;
@@ -71,14 +86,29 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
+        nav a:hover::after { width: 90%; }
+       
+       .sub-nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem; /* 메뉴 간격 유지 */
+        }       
+        /* 두 번째 메뉴(내부 링크)의 글자 크기 줄이기 */ 
+        .sub-nav a {
+            display: flex;              /* flexbox 적용 */
+            align-items: center;        /* 세로 가운데 정렬 */
+            justify-content: center;    /* 가로 가운데 정렬 */
+            height: 40px;               /* 네모칸 높이 (원하는 값으로 조정) */
+            font-size: 0.9rem;          /* 글자 크기 */
+            font-weight: 400;           /* 글자 두께 */
+        }       
 
-        nav a:hover::after {
-            width: 80%;
-        }
 
         /* Hero Section */
+        /* ✅ 수정: margin-top을 두 nav 합친 만큼 */
         .hero {
-            margin-top: 80px;
+            margin-top: calc(var(--topnav-h) + var(--subnav-h) + 20px);
             padding: 100px 5%;
             text-align: center;
             background: white;
@@ -98,12 +128,8 @@
         }
 
         @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .hero h1 {
@@ -126,14 +152,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Section Styles */
@@ -162,7 +182,6 @@
             height: 3px;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
         }
-
         /* About Section */
         .about {
             background: white;
@@ -393,12 +412,22 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
+    <!-- ✅ 첫 번째 nav: 고정 -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Innovation Lab</a>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">소개</a></li>
+                <li><a href="projects.html">프로젝트</a></li>
+                <li><a href="research.html" class="active">연구분야</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ✅ 두 번째 nav: sticky, 첫 번째 바로 아래 붙음 -->
+    <nav class="sub-nav">
         <ul>
-            <li><a href="home.html">홈</a></li>
-            <li><a href="#about">소개</a></li>
-            <li><a href="#projects">프로젝트</a></li>
             <li><a href="#research">연구분야</a></li>
             <li><a href="#team">팀</a></li>
             <li><a href="#contact">연락처</a></li>
@@ -407,17 +436,18 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <h1>Innovation Research Lab</h1>
+        <h1>Fashiondata</h1>
+        <h1>Research Lab</h1>
         <p>미래를 선도하는 혁신적인 연구를 수행합니다</p>
     </section>
 
-    <!-- About Section -->
+    <!-- 이하 기존 about, projects, research, team, contact, footer 동일 -->
+      <!-- About Section -->
     <section id="about" class="about scroll-animate">
         <h2 class="section-title">연구실 소개</h2>
         <p style="font-size: 1.1rem; line-height: 1.8; color: #666;">
             우리 연구실은 최첨단 기술과 창의적인 아이디어를 결합하여 세상을 변화시키는 연구를 수행합니다. 
-            인공지능, 머신러닝, 데이터 사이언스 분야에서 선도적인 연구를 진행하며, 
-            산업계와의 협력을 통해 실용적인 솔루션을 개발하고 있습니다.
+            인공지능, 패션 소비자 분석, 패션 데이터 사이언스 분야에서 선도적인 연구를 진행하고 있습니다
         </p>
     </section>
 
@@ -426,18 +456,13 @@
         <h2 class="section-title">진행중인 프로젝트</h2>
         <div class="projects">
             <div class="project-card scroll-animate">
-                <h3>AI 기반 의료 진단 시스템</h3>
-                <p>딥러닝을 활용한 의료 영상 분석 및 질병 조기 진단 시스템 개발</p>
+                <h3>컴퓨터 비전</h3>
+                <p>패션분야에 적합한 데이터 셋 구축 프로젝트</p>
                 <span class="project-status">진행중</span>
             </div>
             <div class="project-card scroll-animate">
-                <h3>스마트 시티 플랫폼</h3>
-                <p>IoT와 빅데이터를 활용한 도시 인프라 최적화 솔루션</p>
-                <span class="project-status">진행중</span>
-            </div>
-            <div class="project-card scroll-animate">
-                <h3>자율주행 알고리즘</h3>
-                <p>컴퓨터 비전과 센서 융합을 통한 차세대 자율주행 기술 연구</p>
+                <h3>LLM 모델과 소비자 상호작용</h3>
+                <p>Fashion LLM모델과 소비자 상호작용에 관한 연구</p>
                 <span class="project-status">진행중</span>
             </div>
         </div>
@@ -445,7 +470,7 @@
 
     <!-- Research Areas -->
     <section id="research">
-        <h2 class="section-title">주요 연구 분야</h2>
+        <h2 class="section-title">Main research Area</h2>
         <div class="research-grid">
             <div class="research-item scroll-animate">
                 <div class="research-icon">🤖</div>
@@ -459,13 +484,13 @@
             </div>
             <div class="research-item scroll-animate">
                 <div class="research-icon">🔬</div>
-                <h3>바이오인포매틱스</h3>
-                <p>유전체 분석, 단백질 구조 예측</p>
+                <h3>Computer Vision</h3>
+                <p>K-fashiondata, Systems</p>
             </div>
             <div class="research-item scroll-animate">
-                <div class="research-icon">🔐</div>
-                <h3>사이버 보안</h3>
-                <p>암호화, 네트워크 보안, 블록체인</p>
+                <div class="research-icon">🧥</div>
+                <h3>Consumer behavior</h3>
+                <p>Human psychological system</p>
             </div>
         </div>
     </section>
@@ -475,24 +500,14 @@
         <h2 class="section-title">연구팀</h2>
         <div class="team-grid">
             <div class="team-member scroll-animate">
-                <div class="member-avatar">👨‍🏫</div>
-                <h3>김교수</h3>
-                <p>연구실장</p>
+                <div class="member-avatar">👀</div>
+                <h3>권기용</h3>
+                <p>조교수</p>
             </div>
             <div class="team-member scroll-animate">
                 <div class="member-avatar">👨‍🎓</div>
-                <h3>박박사</h3>
-                <p>박사후연구원</p>
-            </div>
-            <div class="team-member scroll-animate">
-                <div class="member-avatar">👩‍🎓</div>
-                <h3>이연구원</h3>
-                <p>박사과정</p>
-            </div>
-            <div class="team-member scroll-animate">
-                <div class="member-avatar">👨‍💻</div>
-                <h3>최연구원</h3>
-                <p>석사과정</p>
+                <h3>모집중</h3>
+                <p>대학원생</p>
             </div>
         </div>
     </section>
@@ -503,15 +518,15 @@
         <div class="contact-info">
             <div class="contact-item">
                 <h3>📧 이메일</h3>
-                <p>research@university.ac.kr</p>
+                <p>fashiondata00@inu.ac.kr</p>
             </div>
             <div class="contact-item">
                 <h3>📞 전화</h3>
-                <p>02-123-4567</p>
+                <p></p>
             </div>
             <div class="contact-item">
                 <h3>📍 위치</h3>
-                <p>서울시 관악구 대학로 1</p>
+                <p>인천대학교 자연과학대학 516호</p>
             </div>
         </div>
     </section>
